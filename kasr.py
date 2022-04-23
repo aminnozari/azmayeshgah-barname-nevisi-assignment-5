@@ -1,55 +1,73 @@
-class complex :
-
-    def __init__(self, real=None, image=None):
-        self.x = real
-        self.y = image
-        #sorat o makhraj 
-
-    def sub(self, second):
-        result=complex()
-        result.x= self.x - second.x
-        result.y= self.y - second.y
-        return result
-    #tafrigh 2 kasr
-
-    def sum(self, second):
-        result=complex()
-        result.x= self.x + second.x
-        result.y= self.y + second.y
-        return result
-    #jam 2 kasr
-
-    def multiple(self, second):
-        result=complex()
-        result.x= self.x * second.x - self.y * second.y
-        result.y= self.x * second.y - self.y * second.x
-        return result
-    #zarb 2 kasr
-
+from math import gcd
+def decore():
+    print("\033[38;5;41m*****************")
+class fraction:
+    def __init__(self, n=0,d=None):
+        self.n = n
+        self.d=d
+        self.reduceFraction()
     def show(self):
-        return str(self.x) +'+('+str(self.y) +')i'
-    #show kasr
+        if self.n==self.d:
+            print("\033[38;5;211m",self.n)
+        elif self.n==0:
+            print('0')
+        else:
+            print("\033[38;5;211m",self.n,"/",self.d)
+        
+    def reduceFraction(self) :
+        c = gcd(self.n,self.d);
+        self.n = self.n // c;
+        self.d= self.d // c;
+    def Sum(self,other):
+        numerator=self.n*other.d+self.d*other.n
+        denominator=self.d*other.d
+        result=fraction(numerator,denominator)
+        return result
+    def Sub(self,other):
+        numerator=self.n*other.d-self.d*other.n
+        denominator=self.d*other.d
+        result=fraction(numerator,denominator)
+        return result
+    def Mult(self,other):
+        numerator=self.n*other.n
+        denominator=self.d*other.d
+        result=fraction(numerator,denominator)
+        return result
+    def Div(self,other):
+        numerator=self.n*other.d
+        denominator=self.d*other.n
+        result=fraction(numerator,denominator)
+        return result
 
-while True:
-    print('enter the complex number1 :')
-    real1 = int(input('enter complex num1 --> real : '))
-    image1 = int(input('enter complex num1 --> image  : '))
-    n1 = complex(real1 ,image1)
-    print('enter the complex number2 :')
-    real2 = int(input('enter complex num2 --> real : '))
-    image2 = int(input('enter complex num2 --> image  : '))
-    n2 = complex(real2, image2)
-    while True:
-        print('\nmenu:\n1.add\n2.sub\n3.mul\n4.exit')
-        c = int(input())
-        if c==1:
-            print(n1.sum(n2).show())
-        if c==2:
-            print(n1.sub(n2).show())
-        if c==3:
-            print(n1.multiple(n2).show())
-        if c==4:
-            break
-    e = input('Do you want to continue ? (y/n)  ')
-    if e == 'n':
-        break
+    
+print('\033[38;5;225mwelcome !')
+print('\033[38;5;225mwe need 4 ints for two fractions.')
+print('\033[38;5;225mplease enter 4 num:')
+n1=int(input())
+d1=int(input())
+while d1==0:
+    print('\033[38;5;209wrong num, try again:')
+    d1=int(input())
+n2=int(input())
+d2=int(input())
+while d2==0:
+    print('\033[38;5;209mwrong num, try again:')
+    d2=int(input())
+f1=fraction(n1,d1)
+f2=fraction(n2,d2)
+decore()
+f3=f1.Sum(f2)
+print('\033[38;5;111mSum:')
+f3.show()
+decore()
+f3=f1.Sub(f2)
+print('\033[38;5;111mSub:')
+f3.show()
+decore()
+f3=f1.Mult(f2)
+print('\033[38;5;111mMult:')
+f3.show()
+decore()
+f3=f1.Div(f2)
+print('\033[38;5;111mDiv:')
+f3.show()
